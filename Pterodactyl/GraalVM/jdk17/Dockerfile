@@ -9,6 +9,10 @@ ARG GRAALVM_VERSION=22.1.0
 ARG JAVA_VERSION=java17
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 
+RUN apt-get update -y \
+    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 \
+    && useradd -d /home/container -m container
+
 RUN echo ${GRAALVM_PKG}
 RUN mkdir /usr/lib/jvm/
 RUN cd /usr/lib/jvm/ \
@@ -19,10 +23,6 @@ RUN cd /usr/lib/jvm/ \
 RUN echo "Set as default JVM..."
 ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
     PATH="/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin:$PATH"
-
-RUN apt-get update -y \
-    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 \
-    && useradd -d /home/container -m container
 
 USER container
 ENV USER=container HOME=/home/container
