@@ -11,7 +11,7 @@ ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/v
 
 RUN mkdir /usr/lib/jvm/
 RUN cd /usr/lib/jvm/
-RUN wget $GRAALVM_PKG
+RUN curl $GRAALVM_PKG
 RUN tar -xzf graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 RUN rm graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 
