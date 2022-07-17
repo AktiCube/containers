@@ -3,12 +3,16 @@ FROM --platform=$TARGETOS/$TARGETARCH ubuntu:20.04
 LABEL author="Louis Ravignot Dos Santos" maintainer="louis.rds@akticube.fr"
 LABEL org.opencontainers.image.source="https://github.com/containers/"
 
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+
 ARG GRAALVM_VERSION=22.1.0
 ARG JAVA_VERSION=java17
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz
 
-RUN mkdir /usr/lib/jvm/ && cd /usr/lib/jvm/ \
-    && wget $GRAALVM_PKG && tar -xzf graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz \
+RUN mkdir /usr/lib/jvm/ \ 
+    && cd /usr/lib/jvm/ \
+    && wget $GRAALVM_PKG \
+    && tar -xzf graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz \
     && rm graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz 
 
 ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
