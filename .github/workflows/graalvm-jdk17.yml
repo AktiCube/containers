@@ -1,12 +1,15 @@
 name: Image for GraalVM JDK-17
 
 on:
+  workflow_dispatch:
+    schedule:
+      - cron: "0 0 1 * *"
   push:
     branches: 
       - main
 
 jobs:
-  push:
+  GraalVM-Image-Build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
