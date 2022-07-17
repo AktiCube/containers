@@ -9,12 +9,17 @@ ARG GRAALVM_VERSION=22.1.0
 ARG JAVA_VERSION=java17
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 
+RUN echo ${GRAALVM_PKG}
 RUN mkdir /usr/lib/jvm/
 RUN cd /usr/lib/jvm/
+RUN echo "Downloading GraalVM..."
 RUN curl $GRAALVM_PKG
+RUN echo "Extracting GraalVM..."
 RUN tar -xzf graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
+RUN echo "Delete temp file..."
 RUN rm graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 
+RUN echo "Set as default JVM..."
 ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
     PATH="/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin:$PATH"
 
