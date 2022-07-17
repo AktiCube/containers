@@ -21,7 +21,7 @@ RUN cd /usr/local/ \
     && echo "Delete temp file..." && rm /tmp/graalvm.tar.gz
 
 RUN echo "Set as default JVM..."
-ENV JAVA_HOME=/usr/local/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}
+ENV JAVA_HOME=/usr/local/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}
 ENV PATH=/usr/local/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin:${PATH}
 RUN java -version 
 
