@@ -15,15 +15,16 @@ RUN apt-get update -y \
     && useradd -d /home/container -m container
 
 RUN echo ${GRAALVM_PKG}
-RUN mkdir /usr/lib/jvm/
-RUN cd /usr/lib/jvm/ \
+RUN mkdir /usr/local/
+RUN cd /usr/local/ \
     && echo "Downloading GraalVM..." && wget ${GRAALVM_PKG} \
     && echo "Extracting GraalVM..." && tar -xzf graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz \
     && echo "Delete temp file..." && rm graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 
 RUN echo "Set as default JVM..."
-ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
-    PATH="/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin/java:$PATH"
+ENV JAVA_HOME=/usr/local/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}
+ENV PATH=/usr/local/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin:${PATH}
+RUN java -version 
 
 USER container
 ENV USER=container HOME=/home/container
