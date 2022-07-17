@@ -7,13 +7,13 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
 ARG GRAALVM_VERSION=22.1.0
 ARG JAVA_VERSION=java17
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 
-RUN mkdir /usr/lib/jvm/ \ 
-    && cd /usr/lib/jvm/ \
-    && wget $GRAALVM_PKG \
-    && tar -xzf graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz \
-    && rm graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz 
+RUN mkdir /usr/lib/jvm/
+RUN cd /usr/lib/jvm/
+RUN wget $GRAALVM_PKG
+RUN tar -xzf graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
+RUN rm graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 
 ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
     PATH="/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin:$PATH"
