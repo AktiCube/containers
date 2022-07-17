@@ -17,7 +17,7 @@ RUN apt-get update -y \
 RUN echo ${GRAALVM_PKG}
 RUN mkdir /usr/lib/jvm/
 RUN cd /usr/lib/jvm/ \
-    && echo "Downloading GraalVM..." && curl -retry 3 -Lfso ${GRAALVM_PKG} \
+    && echo "Downloading GraalVM..." && wget ${GRAALVM_PKG} \
     && echo "Extracting GraalVM..." && tar -xzf graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz \
     && echo "Delete temp file..." && rm graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 
