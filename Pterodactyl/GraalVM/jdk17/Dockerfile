@@ -11,13 +11,10 @@ ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/v
 
 RUN echo ${GRAALVM_PKG}
 RUN mkdir /usr/lib/jvm/
-RUN cd /usr/lib/jvm/
-RUN echo "Downloading GraalVM..."
-RUN curl -retry 3 -Lfso ${GRAALVM_PKG}
-RUN echo "Extracting GraalVM..."
-RUN tar -xzf graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
-RUN echo "Delete temp file..."
-RUN rm graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
+RUN cd /usr/lib/jvm/ \
+    && echo "Downloading GraalVM..." && curl -retry 3 -Lfso ${GRAALVM_PKG} \
+    && echo "Extracting GraalVM..." && tar -xzf graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz \
+    && echo "Delete temp file..." && rm graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 
 RUN echo "Set as default JVM..."
 ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
