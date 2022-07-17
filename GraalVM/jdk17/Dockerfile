@@ -1,8 +1,8 @@
 # Copyright (c) 2020, 2022 Oracle and/or its affiliates.
 # Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
-FROM --platform=$TARGETOS/$TARGETARCH openjdk:8u312-slim
-
+FROM --platform=$TARGETOS/$TARGETARCH container-registry.oracle.com/os/oraclelinux:8-slim
+FROM openjdk:8u312-slim
 # Note: If you are behind a web proxy, set the build variables for the build:
 #       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
 LABEL \
