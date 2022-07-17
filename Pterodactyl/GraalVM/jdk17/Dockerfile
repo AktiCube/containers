@@ -1,7 +1,7 @@
 FROM --platform=$TARGETOS/$TARGETARCH ubuntu:20.04
 
 LABEL author="Louis Ravignot Dos Santos" maintainer="louis.rds@akticube.fr"
-LABEL org.opencontainers.image.source="https://github.com/containers/"
+LABEL org.opencontainers.image.source="https://github.com/AktiCube/containers/"
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ARG DEBIAN_FRONTEND=noninteractive
