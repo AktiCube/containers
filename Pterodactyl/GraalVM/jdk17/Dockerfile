@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG GRAALVM_VERSION=22.1.0
 ARG JAVA_VERSION=java17
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
-ARG GRAALVM_FOLDER_NAME=graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}
+ARG GRAALVM_FOLDER_NAME=graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
     && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6
