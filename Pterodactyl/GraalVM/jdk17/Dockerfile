@@ -4,6 +4,7 @@ LABEL author="Louis Ravignot Dos Santos" maintainer="louis.rds@akticube.fr"
 LABEL org.opencontainers.image.source="https://github.com/containers/"
 
 ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
+ARG DEBIAN_FRONTEND=noninteractive
 
 ARG GRAALVM_VERSION=22.1.0
 ARG JAVA_VERSION=java17
