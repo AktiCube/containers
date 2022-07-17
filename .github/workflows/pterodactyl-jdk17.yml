@@ -1,4 +1,4 @@
-name: Image for GraalVM JDK-17
+name: Image for Pterodactyl JDK-17
 
 on:
   workflow_dispatch:
@@ -25,9 +25,9 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
-          context: ./GraalVM
-          file: ./GraalVM/jdk17/Dockerfile
+          context: ./Pterodactyl
+          file: ./Pterodactyl/GraalVM/jdk17/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/akticube/containers:graalvm-jdk17
+            ghcr.io/akticube/containers:pterodactyl-graalvm-jdk17
