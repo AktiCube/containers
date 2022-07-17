@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH ghcr.io/graalvm/jdk:java17
+FROM --platform=linux/amd64 ghcr.io/graalvm/jdk:java17
 
 LABEL author="Louis Ravignot Dos Santos" maintainer="louis.rds@akticube.fr"
 LABEL org.opencontainers.image.source="https://github.com/containers/"
