@@ -1,7 +1,18 @@
-FROM --platform=$TARGETOS/$TARGETARCH ghcr.io/graalvm/jdk:java17
+FROM --platform=$TARGETOS/$TARGETARCH ubuntu:20.04
 
 LABEL author="Louis Ravignot Dos Santos" maintainer="louis.rds@akticube.fr"
 LABEL org.opencontainers.image.source="https://github.com/containers/"
+
+ARG GRAALVM_VERSION=22.1.0
+ARG JAVA_VERSION=java17
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz
+
+RUN mkdir /usr/lib/jvm/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION && cd /usr/lib/jvm/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION \
+    && wget $GRAALVM_PKG && tar -xzf graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz \
+    && rm graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz 
+
+ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION \
+    PATH="/usr/lib/jvm/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION/bin:$PATH"
 
 RUN apt-get update -y \
     && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 \
