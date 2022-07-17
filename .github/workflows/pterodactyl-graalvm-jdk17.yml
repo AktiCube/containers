@@ -1,9 +1,6 @@
 name: Image for Pterodactyl JDK-17
 
 on:
-  workflow_dispatch:
-    schedule:
-      - cron: "0 3 * * *"
   push:
     branches: 
       - main
