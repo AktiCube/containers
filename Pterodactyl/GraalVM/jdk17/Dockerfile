@@ -23,7 +23,7 @@ RUN cd /usr/lib/jvm/ \
 
 RUN echo "Set as default JVM..."
 ENV JAVA_HOME=/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}} \
-    PATH="/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin:$PATH"
+    PATH="/usr/lib/jvm/graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}}/bin/:$PATH"
 
 USER container
 ENV USER=container HOME=/home/container
