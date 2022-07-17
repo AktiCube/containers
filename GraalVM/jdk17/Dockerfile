@@ -1,47 +1,31 @@
-# Copyright (c) 2020, 2022 Oracle and/or its affiliates.
-# Licensed under the Universal Permissive License v 1.0 as shown at https://oss.oracle.com/licenses/upl/
 
-FROM --platform=$TARGETOS/$TARGETARCH container-registry.oracle.com/os/oraclelinux:8-slim
-FROM openjdk:8u312-slim
-# Note: If you are behind a web proxy, set the build variables for the build:
-#       E.g.:  docker build --build-arg "https_proxy=..." --build-arg "http_proxy=..." --build-arg "no_proxy=..." ...
-LABEL \
-    org.opencontainers.image.url='https://github.com/graalvm/container' \
-    org.opencontainers.image.source='https://github.com/graalvm/container/tree/master/community' \
-    org.opencontainers.image.title='GraalVM Community Edition' \
-    org.opencontainers.image.authors='GraalVM Sustaining Team <graalvm-sustaining_ww_grp@oracle.com>' \
-    org.opencontainers.image.description='GraalVM is a universal virtual machine for running applications written in JavaScript, Python, Ruby, R, JVM-based languages like Java, Scala, Clojure, Kotlin, and LLVM-based languages such as C and C++.'
-    
-RUN microdnf update -y oraclelinux-release-el8 \
-    && microdnf --enablerepo ol8_codeready_builder install bzip2-devel ed gcc gcc-c++ gcc-gfortran gzip file fontconfig less libcurl-devel make openssl openssl-devel readline-devel tar glibc-langpack-en \
-    vi which xz-devel zlib-devel findutils glibc-static libstdc++ libstdc++-devel libstdc++-static zlib-static \
-    && microdnf clean all
+FROM ubuntu:20.04
+ARG GRAAL_VERSION=22.1.0
+ARG JAVA_VERSION=17
+ARG GRAAL_URL=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAAL_VERSION}/graalvm-ce-java${JAVA_VERSION}-linux-amd64-${GRAAL_VERSION}.tar.gz
 
-RUN fc-cache -f -v
+ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 
-ARG GRAALVM_VERSION=22.1.0
-ARG JAVA_VERSION=java17
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-$JAVA_VERSION-GRAALVM_ARCH-$GRAALVM_VERSION.tar.gz
-ARG TARGETPLATFORM
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tzdata curl ca-certificates fontconfig locales binutils procps bash libudev1 fonts-dejavu-core\
+    && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+    && locale-gen en_US.UTF-8 \
+    && rm -rf /var/lib/apt/lists/*
 
-ENV LANG=en_US.UTF-8 \
-    JAVA_HOME=/opt/graalvm-ce-$JAVA_VERSION-$GRAALVM_VERSION
+COPY slim-java* /usr/local/bin/
 
-ADD gu-wrapper.sh /usr/local/bin/gu
-RUN set -eux \
-    && if [ "$TARGETPLATFORM" == "linux/amd64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-amd64}; fi \
-    && if [ "$TARGETPLATFORM" == "linux/arm64" ]; then GRAALVM_PKG=${GRAALVM_PKG/GRAALVM_ARCH/linux-aarch64}; fi \
-    && curl --fail --silent --location --retry 3 ${GRAALVM_PKG} \
-    | gunzip | tar x -C /opt/ \
-    # Set alternative links
-    && mkdir -p "/usr/java" \
-    && ln -sfT "$JAVA_HOME" /usr/java/default \
-    && ln -sfT "$JAVA_HOME" /usr/java/latest \
-    && for bin in "$JAVA_HOME/bin/"*; do \
-    base="$(basename "$bin")"; \
-    [ ! -e "/usr/bin/$base" ]; \
-    alternatives --install "/usr/bin/$base" "$base" "$bin" 20000; \
-    done \
-    && chmod +x /usr/local/bin/gu
+RUN set -eux; \
+    export DEBIAN_FRONTEND=noninteractive; \
+    curl --retry 3 -Lfso /tmp/graalvm.tar.gz ${GRAAL_URL}; \
+    mkdir -p /opt/java/graalvm; \
+    cd /opt/java/graalvm; \
+    tar -xf /tmp/graalvm.tar.gz --strip-components=1; \
+    export PATH="/opt/java/graalvm/bin:$PATH"; \
+    /usr/local/bin/slim-java.sh /opt/java/graalvm; \
+    rm -rf /var/lib/apt/lists/*; \
+    rm -rf /tmp/graalvm.tar.gz;
+
+ENV JAVA_HOME=/opt/java/graalvm \
+    PATH="/opt/java/graalvm/bin:$PATH"
 
 CMD java -version
