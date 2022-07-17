@@ -13,7 +13,7 @@ RUN echo ${GRAALVM_PKG}
 RUN mkdir /usr/lib/jvm/
 RUN cd /usr/lib/jvm/
 RUN echo "Downloading GraalVM..."
-RUN curl $GRAALVM_PKG
+RUN curl ${GRAALVM_PKG}
 RUN echo "Extracting GraalVM..."
 RUN tar -xzf graalvm-ce-${JAVA_VERSION}-GRAALVM_ARCH-${GRAALVM_VERSION}.tar.gz
 RUN echo "Delete temp file..."
