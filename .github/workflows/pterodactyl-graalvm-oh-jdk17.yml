@@ -1,4 +1,4 @@
-name: Image for Pterodactyl JDK-17
+name: Image for OH Pterodactyl JDK-17
 
 on:
   push:
