@@ -1,15 +1,22 @@
-name: Image for Pterodactyl JDK-17
+name: Images for Pterodactyl GraalVM
 
 on:
   push:
     branches: 
       - main
     paths:
-      - Pterodactyl/GraalVM/jdk17/**
+      - Pterodactyl/GraalVM/**
 
 jobs:
-  Pterodactyl-GraalVM-JDK-17-Image-Build:
+  push:
+    name: "Pterodactyl-GraalVM-${{ matrix.tag }}"
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        tag:
+          - jdk11
+          - jdk17
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
@@ -25,8 +32,8 @@ jobs:
       - uses: docker/build-push-action@v2
         with:
           context: ./Pterodactyl
-          file: ./Pterodactyl/GraalVM/jdk17/Dockerfile
+          file: ./Pterodactyl/GraalVM/${{ matrix.tag }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/akticube/containers:pterodactyl-graalvm-jdk17
+            ghcr.io/akticube/containers:pterodactyl-graalvm-${{ matrix.tag }}
