@@ -24,7 +24,7 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
-          context: ./Pterodactyl
+          context: ./Pterodactyl/GraalVM-OH/
           file: ./Pterodactyl/GraalVM-OH/jdk17/Dockerfile
           platforms: linux/amd64
           push: true
