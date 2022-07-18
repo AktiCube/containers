@@ -2,6 +2,7 @@ FROM --platform=$TARGETOS/$TARGETARCH amd64/debian
 
 LABEL author="Louis Ravignot Dos Santos for ouiheberg.com" maintainer="louis.rds@akticube.fr"
 LABEL org.opencontainers.image.source="https://github.com/AktiCube/containers/"
+LABEL org.opencontainers.image.description="A Docker image to run GraalVM JDK 17 on OuiPanel (https://ouipanel.fr)" 
 
 # Linux things
 
