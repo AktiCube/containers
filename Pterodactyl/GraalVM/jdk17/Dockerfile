@@ -24,9 +24,9 @@ RUN cd /usr/local/ \
     && echo "Extracting GraalVM..." && tar -xzf /tmp/graalvm.tar.gz \
     && echo "Delete temp file..." && rm /tmp/graalvm.tar.gz
 
-RUN echo "Mooving GraalVM" && mkdir /usr/local/graalvm && mv /usr/local/${GRAALVM_FOLDER_NAME}/* /usr/local/graalvm && rm -rf /usr/local/${GRAALVM_FOLDER_NAME}
+RUN echo "Mooving GraalVM..." && mkdir /usr/local/graalvm && mv /usr/local/${GRAALVM_FOLDER_NAME}/* /usr/local/graalvm && rm -rf /usr/local/${GRAALVM_FOLDER_NAME}
 
-RUN echo "Setting GraalVM environment variables"
+RUN echo "Setting GraalVM environment variables..."
 ENV JAVA_HOME=/usr/local/graalvm
 ENV PATH=/usr/local/graalvm/bin:${PATH}
 
