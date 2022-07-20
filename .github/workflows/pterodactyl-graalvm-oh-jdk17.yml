@@ -5,7 +5,7 @@ on:
     branches: 
       - main
     paths:
-      - Pterodactyl/GraalVM-OH/jdk17/**
+      - Pterodactyl/GraalVM-OH/**
 
 jobs:
   Pterodactyl-GraalVM-JDK-17-OH-Image-Build:
