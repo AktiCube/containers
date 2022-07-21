@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 ARG GRAALVM_VERSION=22.2.0
 ARG JAVA_VERSION=java17
-ARG GRAALVM_PKG=https://mirror.akticube.fr/GraalVM/graalvm-ee-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
+ARG GRAALVM_PKG=https://akticu.be/GraalVM/graalvm-ee-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 ARG GRAALVM_FOLDER_NAME=graalvm-ee-${JAVA_VERSION}-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
