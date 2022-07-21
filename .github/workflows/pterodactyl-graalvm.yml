@@ -16,6 +16,7 @@ jobs:
       matrix:
         version:
           - jdk11
+          - jdk11-ee
           - jdk17
           - jdk17-ee
     steps:
