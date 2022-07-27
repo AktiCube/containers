@@ -26,4 +26,4 @@ An image for [GraalVM](https://graalvm.org/) JDK 17 to run on [OuiPanel](https:/
 - - -
 ## Sponsor :
 
-[![ouiheberg.com](https://raw.githubusercontent.com/AktiCube/containers/main/Pterodactyl/GraalVM-OH/ohlogo.png)]([https://ouiheberg.com/](https://www.ouiheberg.com/panel/aff.php?aff=242))
+[![ouiheberg.com](https://raw.githubusercontent.com/AktiCube/containers/main/Pterodactyl/GraalVM-OH/ohlogo.png)](https://www.ouiheberg.com/panel/aff.php?aff=242)
