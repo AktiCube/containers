@@ -35,7 +35,7 @@ jobs:
         with:
           context: ./Pterodactyl
           file: ./Pterodactyl/GraalVM-arm64/${{ matrix.version }}/Dockerfile
-          platforms: linux/arm64
+          platforms: linux/arm64v8
           push: true
           tags: |
             ghcr.io/akticube/containers:pterodactyl-graalvm-${{ matrix.version }}-arm64
