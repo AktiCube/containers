@@ -11,7 +11,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM JDK 17
 
-ARG GRAALVM_VERSION=22.1.0
+ARG GRAALVM_VERSION=22.2.0
 ARG JAVA_VERSION=java17
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 ARG GRAALVM_FOLDER_NAME=graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}
