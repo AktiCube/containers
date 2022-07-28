@@ -32,7 +32,7 @@ ENV JAVA_HOME=/usr/local/graalvm
 ENV PATH=/usr/local/graalvm/bin:${PATH}
 
 # Check if the installation was successful
-RUN java -version 
+#RUN java -version 
 
 # Pterodactyl things
 RUN useradd -d /home/container -m container
