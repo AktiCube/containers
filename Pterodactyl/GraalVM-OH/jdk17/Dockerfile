@@ -5,19 +5,28 @@ LABEL org.opencontainers.image.source="https://github.com/AktiCube/containers/"
 LABEL org.opencontainers.image.description="A Docker image to run GraalVM EE JDK 17 on OuiPanel (https://ouipanel.fr)" 
 
 # Linux things
-
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM EE JDK 17
-
 ARG GRAALVM_VERSION=22.2.0
 ARG JAVA_VERSION=java17
 ARG GRAALVM_PKG=https://akticu.be/GraalVM/graalvm-ee-${JAVA_VERSION}-linux-amd64-${GRAALVM_VERSION}.tar.gz
 ARG GRAALVM_FOLDER_NAME=graalvm-ee-${JAVA_VERSION}-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
-    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6
+    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all language-pack-en
+
+# Setting the language
+RUN echo "Setting the language..."
+ENV LANG='en_US.UTF-8'
+ENV LANGUAGE='en_US.UTF-8'
+ENV LC_ALL='en_US.UTF-8'
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
+
+# Change the time of the container to Europe/Paris
+RUN echo "Changing the time of the container to Europe/Paris..."
+RUN echo "Europe/Paris" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 RUN echo ${GRAALVM_PKG}
 RUN cd /usr/local/ \
@@ -33,11 +42,6 @@ ENV PATH=/usr/local/graalvm/bin:${PATH}
 
 # Check if the installation was successful
 RUN java -version 
-
-# Change the time of the container to Europe/Paris
-RUN echo "Change the time of the container to Europe/Paris"
-RUN echo "Europe/Paris" > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
 
 # Pterodactyl things
 RUN useradd -d /home/container -m container
