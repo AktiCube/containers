@@ -34,6 +34,9 @@ ENV PATH=/usr/local/graalvm/bin:${PATH}
 # Check if the installation was successful
 RUN java -version 
 
+# Change the time of the container to Europe/Paris
+RUN echo "Change the time of the container to Europe/Paris" && timedatectl set-timezone Europe/Paris
+
 # Pterodactyl things
 RUN useradd -d /home/container -m container
 
