@@ -35,7 +35,9 @@ ENV PATH=/usr/local/graalvm/bin:${PATH}
 RUN java -version 
 
 # Change the time of the container to Europe/Paris
-RUN echo "Change the time of the container to Europe/Paris" && timedatectl set-timezone Europe/Paris
+RUN echo "Change the time of the container to Europe/Paris"
+RUN echo "Europe/Paris" > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
 
 # Pterodactyl things
 RUN useradd -d /home/container -m container
