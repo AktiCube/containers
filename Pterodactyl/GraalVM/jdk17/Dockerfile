@@ -5,8 +5,6 @@ LABEL org.opencontainers.image.source="https://github.com/AktiCube/containers/"
 LABEL org.opencontainers.image.description="A Docker image to run GraalVM JDK 17 on Pterodactyl" 
 
 # Linux things
-
-ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM JDK 17
@@ -17,7 +15,14 @@ ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/v
 ARG GRAALVM_FOLDER_NAME=graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
-    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6
+    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all
+
+# Setting the language
+RUN echo "Setting the language..."
+ENV LANG='en_US.UTF-8'
+ENV LANGUAGE='en_US.UTF-8'
+ENV LC_ALL='en_US.UTF-8'
+RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
 RUN echo ${GRAALVM_PKG}
 RUN cd /usr/local/ \
