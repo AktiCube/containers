@@ -17,7 +17,7 @@ ARG GRAALVM_PKG=https://akticu.be/GraalVM/graalvm-ee-${JAVA_VERSION}-linux-aarch
 ARG GRAALVM_FOLDER_NAME=graalvm-ee-${JAVA_VERSION}-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
-    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all
+    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all font-manager
 
 # Setting the language
 RUN echo "Setting the language..."
