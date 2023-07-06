@@ -8,11 +8,9 @@ LABEL org.opencontainers.image.description="A Docker image to run GraalVM JDK 17
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM JDK 17
-
-ARG GRAALVM_VERSION=22.3.1
-ARG JAVA_VERSION=java17
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-linux-aarch64-${GRAALVM_VERSION}.tar.gz
-ARG GRAALVM_FOLDER_NAME=graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}
+ARG GRAALVM_VERSION=17.0.7
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${GRAALVM_VERSION}/graalvm-community-jdk-${JAVA_VERSION}_linux-aarch64_bin.tar.gz
+ARG GRAALVM_FOLDER_NAME=graalvm-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
     && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all font-manager
