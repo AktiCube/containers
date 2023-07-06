@@ -8,10 +8,9 @@ LABEL org.opencontainers.image.description="A Docker image to run GraalVM JDK 11
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM JDK 11
-
-ARG GRAALVM_VERSION=22.3.1
+ARG GRAALVM_VERSION=22.3.2
 ARG JAVA_VERSION=java11
-ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-$GRAALVM_VERSION/graalvm-ce-${JAVA_VERSION}-linux-aarch64-${GRAALVM_VERSION}.tar.gz
+ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/vm-${GRAALVM_VERSION}/graalvm-ce-${JAVA_VERSION}-linux-aarch64-${GRAALVM_VERSION}.tar.gz
 ARG GRAALVM_FOLDER_NAME=graalvm-ce-${JAVA_VERSION}-${GRAALVM_VERSION}
 
 RUN apt-get update -y \
