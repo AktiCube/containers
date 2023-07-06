@@ -10,7 +10,6 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en' LC_ALL='en_US.UTF-8'
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM EE JDK 11
-
 ARG GRAALVM_VERSION=22.3.2
 ARG JAVA_VERSION=java11
 ARG GRAALVM_PKG=https://akticu.be/GraalVM/graalvm-ee-${JAVA_VERSION}-linux-aarch64-${GRAALVM_VERSION}.tar.gz
