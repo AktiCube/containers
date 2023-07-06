@@ -15,10 +15,12 @@ jobs:
       fail-fast: false
       matrix:
         version:
+          - jdk8-ee
           - jdk11
           - jdk11-ee
           - jdk17
           - jdk17-ee
+          - jdk20
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
