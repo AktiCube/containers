@@ -10,7 +10,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 # Installing GraalVM JDK 17
 ARG GRAALVM_VERSION=17.0.7
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${GRAALVM_VERSION}/graalvm-community-jdk-${GRAALVM_VERSION}_linux-aarch64_bin.tar.gz
-ARG GRAALVM_FOLDER_NAME=graalvm-${GRAALVM_VERSION}
+ARG GRAALVM_FOLDER_NAME=graalvm-community-openjdk-${GRAALVM_VERSION}+7.1
 
 RUN apt-get update -y \
     && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all font-manager
