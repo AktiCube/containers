@@ -1,4 +1,4 @@
-FROM --platform=$TARGETOS/$TARGETARCH aarch64/debian
+FROM --platform=$TARGETOS/$TARGETARCH arm64v8/debian
 
 LABEL author="Louis Ravignot Dos Santos" maintainer="louis.rds@akticube.fr"
 LABEL org.opencontainers.image.source="https://github.com/AktiCube/containers/"
