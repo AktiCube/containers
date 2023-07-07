@@ -14,7 +14,7 @@ ARG GRAALVM_FOLDER_NAME=graalvm-community-openjdk-${GRAALVM_VERSION}+9.1
 
 RUN apt-get update -y \
     && apt-get upgrade -y \
-    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all font-manager
+    && apt-get install -y lsof curl ca-certificates openssl git tar sqlite3 fontconfig libfreetype6 tzdata iproute2 libstdc++6 locales locales-all font-manager libc6-compat
 
 # Setting the language
 RUN echo "Setting the language..."
