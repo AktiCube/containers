@@ -21,6 +21,7 @@ jobs:
           - jdk17
           - jdk17-ee
           - jdk20
+          - jdk21
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
