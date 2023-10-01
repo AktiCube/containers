@@ -8,15 +8,24 @@ on:
       - Pterodactyl/GraalVM-OH/**
 
 jobs:
-  Pterodactyl-GraalVM-JDK-17-OH-Image-Build:
+  push:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        version:
+          - jdk17
+          - jdk21
     steps:
       - uses: actions/checkout@v2
       - uses: docker/setup-qemu-action@v1
-      - uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
         with:
-          version: "v0.5.1"
+          version: "latest"
           buildkitd-flags: --debug
+          driver-opts: |
+            image=moby/buildkit:v0.10.6
       - uses: docker/login-action@v1
         with:
           registry: ghcr.io
@@ -24,9 +33,9 @@ jobs:
           password: ${{ secrets.REGISTRY_TOKEN }}
       - uses: docker/build-push-action@v2
         with:
-          context: ./Pterodactyl/GraalVM-OH/
-          file: ./Pterodactyl/GraalVM-OH/jdk17/Dockerfile
+          context: ./Pterodactyl
+          file: ./Pterodactyl/GraalVM/${{ matrix.version }}/Dockerfile
           platforms: linux/amd64
           push: true
           tags: |
-            ghcr.io/akticube/containers:pterodactyl-graalvm-ouiheberg-jdk17
+            ghcr.io/akticube/containers:pterodactyl-graalvm-ouiheberg-${{ matrix.version }}
