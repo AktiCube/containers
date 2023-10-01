@@ -8,7 +8,7 @@ LABEL org.opencontainers.image.description="A Docker image to run GraalVM JDK 20
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Installing GraalVM JDK 20
-ARG GRAALVM_VERSION=20.0.1
+ARG GRAALVM_VERSION=20.0.2
 ARG GRAALVM_PKG=https://github.com/graalvm/graalvm-ce-builds/releases/download/jdk-${GRAALVM_VERSION}/graalvm-community-jdk-${GRAALVM_VERSION}_linux-x64_bin.tar.gz
 ARG GRAALVM_FOLDER_NAME=graalvm-community-openjdk-${GRAALVM_VERSION}+9.1
 
