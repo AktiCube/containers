@@ -2,6 +2,10 @@
 All Docker images used by the AktiCube infrastructure.
 
 # Available images:
+> `ghcr.io/akticube/containers:pterodactyl-graalvm-jdk21`
+
+An image for [GraalVM](https://graalvm.org/) JDK 21 to run on [Pterodactyl](https://pterodactyl.io).
+
 > `ghcr.io/akticube/containers:pterodactyl-graalvm-jdk20`
 
 An image for [GraalVM](https://graalvm.org/) JDK 20 to run on [Pterodactyl](https://pterodactyl.io).
