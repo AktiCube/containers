@@ -11,6 +11,9 @@ jobs:
   push:
     name: "Pterodactyl-GraalVM-ARM64-${{ matrix.version }}"
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     strategy:
       fail-fast: false
       matrix:
