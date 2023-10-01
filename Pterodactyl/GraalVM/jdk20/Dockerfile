@@ -38,7 +38,7 @@ ENV PATH=/usr/local/graalvm/bin:${PATH}
 # Check if the installation was successful
 RUN java -version 
 
-# Pterodactyl things
+# Pterodactyl nice things
 RUN useradd -d /home/container -m container
 
 USER container
